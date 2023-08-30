@@ -9,6 +9,8 @@ import UIKit
 
 final class CatalogViewController: UIViewController {
     
+    let viewModel = CatalogViewModel()
+    
     // MARK: - Constants and Variables:
     enum UIConstants {
         static let numberOfCells: CGFloat = 2
@@ -31,6 +33,7 @@ final class CatalogViewController: UIViewController {
     // MARK: - Lifecycle:
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel.fetchProducts()
         setupViews()
         setupConstraints()
     }

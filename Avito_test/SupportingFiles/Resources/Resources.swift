@@ -13,6 +13,7 @@ enum Resources {
     }
     
     enum Network {
-        static let defaultURL = "https://www.avito.st/s/interns-ios/main-page.json"
+        static let defaultURL = "https://www.avito.st"
+        static let mainCatalogURL = "/s/interns-ios/main-page.json"
     }
 }
