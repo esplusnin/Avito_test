@@ -16,3 +16,20 @@
 // MARK: BaseCustomButton:
 "baseButton.call" = "📞 Call";
 "baseButton.write" = "💬 Message";
+
+// MARK: - Network Errors:
+"networkError.http.404" = "Nothing was found on the request";
+"networkError.http.409" = "Resource update error";
+"networkError.http.410" = "The requested resource is no longer available";
+"networkError.http.5хх" = "Server-side error";
+"networkError.URLSessionError" = "Check your internet connection";
+"networkError.parsingError" = "Failed to convert the received data";
+"networkError.anotherError" = "Data could not be retrieved";
+"networkError.requestError" = "Request execution error";
+"networkError.tryLater" = "Please try again later";
+
+// MARK: - AlertService:
+"alertService.title" = "The number is temporary";
+"alertService.message" = "You don't need to save it. You will not be able to call or send SMS in messengers, but you can write to the author of the ad on the platform";
+"alertService.callTitle" = "Call";
+"alertService.messageTitle" = "Write to";

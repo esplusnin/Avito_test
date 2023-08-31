@@ -7,14 +7,14 @@
 
 import UIKit
 
+enum StateButton {
+    case call
+    case write
+}
+
 final class BaseCustomButton: UIButton {
     
-    // MARK: - Button States:
-    enum StateButton {
-        case call
-        case write
-    }
-    
+    // MARK: - Constants and Variables:
     private var stateButton: StateButton
     
     // MARK: - Lifecycle:

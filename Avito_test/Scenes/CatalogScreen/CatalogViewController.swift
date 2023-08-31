@@ -101,6 +101,17 @@ final class CatalogViewController: UIViewController {
                 self.unblockUI()
             }
         }
+        
+        viewModel?.errorStringObservable.bind { [weak self] errorString in
+            guard let self else { return }
+            if let errorString {
+                DispatchQueue.main.async {
+                    self.unblockUI()
+                    self.refreshControl.endRefreshing()
+                    self.showNotificationBanner(with: errorString)
+                }
+            }
+        }
     }
     
     private func switchToProductVC(productID: String) {

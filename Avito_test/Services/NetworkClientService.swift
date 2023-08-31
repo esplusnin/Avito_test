@@ -21,7 +21,9 @@ final class NetworkClientService: NetworkClientServiceProtocol {
     
     // MARK: - Public Methods:
     func fetchData<T: Decodable>(url: URL, model: T.Type, completion: @escaping (Result<T, Error>) -> Void) {
-        let request = URLRequest(url: url)
+        var request = URLRequest(url: url)
+        request.timeoutInterval = 5
+        request.cachePolicy = .reloadIgnoringLocalCacheData
         
         session.dataTask(with: request) { data, response, error in
             guard let response = response as? HTTPURLResponse else {

@@ -23,5 +23,6 @@ enum Resources {
     
     enum Images {
         static let cancelButtonImage = UIImage(systemName: "minus.circle")?.withTintColor(.gray, renderingMode: .alwaysOriginal)
+        static let notificationBannerImage = UIImage(systemName: "antenna.radiowaves.left.and.right.slash")
     }
 }

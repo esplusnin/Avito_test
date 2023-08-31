@@ -24,8 +24,15 @@ final class CatalogViewModel: CatalogViewModelProtocol {
         $products
     }
     
+    var errorStringObservable: Observable<String?> {
+        $errorString
+    }
+    
     @Observable
     private(set) var products: Advertisements = []
+    
+    @Observable
+    private(set) var errorString: String?
     
     // MARK: - Lifecycle:
     init(provider: DataProviderProtocol) {
@@ -41,7 +48,8 @@ final class CatalogViewModel: CatalogViewModelProtocol {
                 self.products = products
                 self.unsortedProducts = products
             case .failure(let error):
-                print(error)
+                let errorString = HandlingErrorService().handlingHTTPStatusCodeError(error: error)
+                self.errorString = errorString
             }
         }
     }

@@ -9,5 +9,6 @@ import Foundation
 
 protocol ProductViewModelProtocol: AnyObject {
     var productObservable: Observable<Product?> { get }
+    var errorStringObservable: Observable<String?> { get }
     func fetchProduct()
 }

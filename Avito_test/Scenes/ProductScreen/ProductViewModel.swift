@@ -20,8 +20,15 @@ final class ProductViewModel: ProductViewModelProtocol {
         $product
     }
     
+    var errorStringObservable: Observable<String?> {
+        $errorString
+    }
+
     @Observable
     private(set) var product: Product?
+    
+    @Observable
+    private(set) var errorString: String?
     
     // MARK: - Lifecycle:
     init(provider: DataProviderProtocol?, productID: String) {
@@ -37,7 +44,9 @@ final class ProductViewModel: ProductViewModelProtocol {
             case .success(let product):
                 self.product = product
             case .failure(let error):
-                print(error)
+                print("FAILURE")
+                let errorString = HandlingErrorService().handlingHTTPStatusCodeError(error: error)
+                self.errorString = errorString
             }
         }
     }

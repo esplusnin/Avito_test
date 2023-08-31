@@ -27,6 +27,9 @@
 		7E70CE022AA099E600E10C2D /* UIViewController + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E70CE012AA099E600E10C2D /* UIViewController + Extension.swift */; };
 		7E70CE0E2AA0DFF700E10C2D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7E70CE102AA0DFF700E10C2D /* Localizable.strings */; };
 		7E70CE152AA0EE1000E10C2D /* LocalizableStrings+Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E70CE142AA0EE1000E10C2D /* LocalizableStrings+Generated.swift */; };
+		7E70CE172AA0F0D700E10C2D /* HandlingErrorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E70CE162AA0F0D700E10C2D /* HandlingErrorService.swift */; };
+		7E70CE1A2AA0F27400E10C2D /* NotificationBannerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 7E70CE192AA0F27400E10C2D /* NotificationBannerSwift */; };
+		7E70CE1C2AA0F59C00E10C2D /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E70CE1B2AA0F59C00E10C2D /* AlertService.swift */; };
 		7E90D7902A9F2F3A009F968D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E90D78F2A9F2F3A009F968D /* AppDelegate.swift */; };
 		7E90D7922A9F2F3A009F968D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E90D7912A9F2F3A009F968D /* SceneDelegate.swift */; };
 		7E90D7942A9F2F3A009F968D /* CatalogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E90D7932A9F2F3A009F968D /* CatalogViewController.swift */; };
@@ -57,6 +60,8 @@
 		7E70CE0F2AA0DFF700E10C2D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		7E70CE112AA0E01200E10C2D /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		7E70CE142AA0EE1000E10C2D /* LocalizableStrings+Generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "LocalizableStrings+Generated.swift"; path = "Avito_test/SupportingFiles/LocalizableStrings+Generated.swift"; sourceTree = SOURCE_ROOT; };
+		7E70CE162AA0F0D700E10C2D /* HandlingErrorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandlingErrorService.swift; sourceTree = "<group>"; };
+		7E70CE1B2AA0F59C00E10C2D /* AlertService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertService.swift; sourceTree = "<group>"; };
 		7E90D78C2A9F2F3A009F968D /* Avito_test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Avito_test.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E90D78F2A9F2F3A009F968D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7E90D7912A9F2F3A009F968D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -74,6 +79,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7E70CDEC2A9F6CFA00E10C2D /* Kingfisher in Frameworks */,
+				7E70CE1A2AA0F27400E10C2D /* NotificationBannerSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -105,8 +111,10 @@
 			isa = PBXGroup;
 			children = (
 				7E70CDD42A9F43FB00E10C2D /* Protocols */,
+				7E70CE1B2AA0F59C00E10C2D /* AlertService.swift */,
 				7E70CDDF2A9F51DD00E10C2D /* DataProvider.swift */,
 				7E70CDCF2A9F43C900E10C2D /* NetworkClientService.swift */,
+				7E70CE162AA0F0D700E10C2D /* HandlingErrorService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -269,6 +277,7 @@
 			name = Avito_test;
 			packageProductDependencies = (
 				7E70CDEB2A9F6CFA00E10C2D /* Kingfisher */,
+				7E70CE192AA0F27400E10C2D /* NotificationBannerSwift */,
 			);
 			productName = Avito_test;
 			productReference = 7E90D78C2A9F2F3A009F968D /* Avito_test.app */;
@@ -301,6 +310,7 @@
 			mainGroup = 7E90D7832A9F2F3A009F968D;
 			packageReferences = (
 				7E70CDEA2A9F6CFA00E10C2D /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				7E70CE182AA0F27400E10C2D /* XCRemoteSwiftPackageReference "NotificationBanner" */,
 			);
 			productRefGroup = 7E90D78D2A9F2F3A009F968D /* Products */;
 			projectDirPath = "";
@@ -369,9 +379,11 @@
 				7E70CDF62AA06DEC00E10C2D /* ProductViewModelProtocol.swift in Sources */,
 				7E90D7922A9F2F3A009F968D /* SceneDelegate.swift in Sources */,
 				7E70CDE92A9F69DA00E10C2D /* DataProviderProtocol.swift in Sources */,
+				7E70CE1C2AA0F59C00E10C2D /* AlertService.swift in Sources */,
 				7E70CDD02A9F43C900E10C2D /* NetworkClientService.swift in Sources */,
 				7E70CDE42A9F672C00E10C2D /* CatalogViewModelProtocol.swift in Sources */,
 				7E70CDD82A9F454F00E10C2D /* Advertisement.swift in Sources */,
+				7E70CE172AA0F0D700E10C2D /* HandlingErrorService.swift in Sources */,
 				7E70CE002AA08E5100E10C2D /* Product.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -609,6 +621,14 @@
 				minimumVersion = 7.0.0;
 			};
 		};
+		7E70CE182AA0F27400E10C2D /* XCRemoteSwiftPackageReference "NotificationBanner" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Daltron/NotificationBanner";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -616,6 +636,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 7E70CDEA2A9F6CFA00E10C2D /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		7E70CE192AA0F27400E10C2D /* NotificationBannerSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7E70CE182AA0F27400E10C2D /* XCRemoteSwiftPackageReference "NotificationBanner" */;
+			productName = NotificationBannerSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

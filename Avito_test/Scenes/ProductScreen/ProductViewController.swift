@@ -82,6 +82,7 @@ final class ProductViewController: UIViewController {
         super.viewDidLoad()
         setupViews()
         setupConstraints()
+        setupTarget()
         
         bind()
         viewModel?.fetchProduct()
@@ -98,6 +99,16 @@ final class ProductViewController: UIViewController {
                 self.unblockUI()
             }
         }
+        
+        viewModel?.errorStringObservable.bind { [weak self] errorString in
+            guard let self else { return }
+            if let errorString {
+                DispatchQueue.main.async {
+                    self.unblockUI()
+                    self.showNotificationBanner(with: errorString)
+                }
+            }
+        }
     }
     
     private func clearViewsBackground() {
@@ -105,6 +116,14 @@ final class ProductViewController: UIViewController {
          descriptionLabel, advertiseDate].forEach { view in
             view.backgroundColor = .clear
         }
+    }
+    
+    @objc private func showCallAlert() {
+        AlertService().showAlert(viewController: self, state: .call, productText: productModel?.phoneNumber ?? "")
+    }
+    
+    @objc private func showMessageAlert() {
+        AlertService().showAlert(viewController: self, state: .write, productText: productModel?.email ?? "")
     }
 }
 
@@ -197,7 +216,14 @@ extension ProductViewController {
             messageButton.widthAnchor.constraint(equalToConstant: buttonWidht),
             messageButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -UIConstants.sideInset),
             messageButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -UIConstants.sideInset),
-            
         ])
+    }
+}
+
+// MARK: - Setup Targets:
+extension ProductViewController {
+    private func setupTarget() {
+        callButton.addTarget(self, action: #selector(showCallAlert), for: .touchUpInside)
+        messageButton.addTarget(self, action: #selector(showMessageAlert), for: .touchUpInside)
     }
 }
