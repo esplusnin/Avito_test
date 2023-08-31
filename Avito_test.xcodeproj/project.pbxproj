@@ -117,11 +117,8 @@
 		7E70CDD12A9F43CC00E10C2D /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				7E70CDD42A9F43FB00E10C2D /* Protocols */,
+				7E70CE292AA1262C00E10C2D /* Network */,
 				7E70CE1B2AA0F59C00E10C2D /* AlertService.swift */,
-				7E70CDDF2A9F51DD00E10C2D /* DataProvider.swift */,
-				7E70CDCF2A9F43C900E10C2D /* NetworkClientService.swift */,
-				7E70CE162AA0F0D700E10C2D /* HandlingErrorService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -232,6 +229,17 @@
 				7E70CE242AA121AE00E10C2D /* GreetingAnimation.json */,
 			);
 			path = Animation;
+			sourceTree = "<group>";
+		};
+		7E70CE292AA1262C00E10C2D /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				7E70CDD42A9F43FB00E10C2D /* Protocols */,
+				7E70CDDF2A9F51DD00E10C2D /* DataProvider.swift */,
+				7E70CDCF2A9F43C900E10C2D /* NetworkClientService.swift */,
+				7E70CE162AA0F0D700E10C2D /* HandlingErrorService.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 		7E90D7832A9F2F3A009F968D = {
