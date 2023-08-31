@@ -16,8 +16,10 @@ enum NetworkError: Error {
 
 final class NetworkClientService: NetworkClientServiceProtocol {
     
+    // MARK: - Constants and Variables:
     let session = URLSession.shared
     
+    // MARK: - Public Methods:
     func fetchData<T: Decodable>(url: URL, model: T.Type, completion: @escaping (Result<T, Error>) -> Void) {
         let request = URLRequest(url: url)
         
@@ -43,6 +45,7 @@ final class NetworkClientService: NetworkClientServiceProtocol {
         .resume()
     }
     
+    // MARK: - Supporting Methods:
     private func pars<T: Decodable>(model: T.Type, data: Data, completion: @escaping (Result<T, Error>) -> Void) {
         let decoder = JSONDecoder()
         

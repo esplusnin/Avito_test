@@ -7,10 +7,12 @@
 
 import Foundation
 
-final class DataProvider {
+final class DataProvider: DataProviderProtocol {
     
+    // MARK: - Dependencies:
     private let networkClient = NetworkClientService()
     
+    // MARK: - Public Methods:
     func fetchAdvertisement(completion: @escaping (Result<Advertisements, Error>) -> Void) {
         guard let url = createFullPathURL(path: Resources.Network.mainCatalogURL) else { return }
         
@@ -24,6 +26,7 @@ final class DataProvider {
         }
     }
     
+    // MARK: - Supporting Methods:
     private func createFullPathURL(path: String) -> URL? {
         let urlString = Resources.Network.defaultURL + path
         

@@ -9,7 +9,8 @@ import UIKit
 
 final class CatalogViewController: UIViewController {
     
-    let viewModel = CatalogViewModel()
+    // MARK: - Dependencies:
+    let viewModel: CatalogViewModelProtocol?
     
     // MARK: - Constants and Variables:
     enum UIConstants {
@@ -26,23 +27,54 @@ final class CatalogViewController: UIViewController {
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.backgroundColor = .greenDay
         
         return collectionView
     }()
+    
+    private lazy var refreshControl = UIRefreshControl()
 
     // MARK: - Lifecycle:
+    init(viewModel: CatalogViewModelProtocol) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel.fetchProducts()
         setupViews()
         setupConstraints()
+        setupTargets()
+        
+        bind()
+        viewModel?.fetchProducts()
+    }
+    
+    // MARK: - Private Methods:
+    private func bind() {
+        viewModel?.productsObservable.bind { [weak self] _ in
+            guard let self else { return }
+            DispatchQueue.main.async {
+                self.refreshControl.endRefreshing()
+                self.catalogCollectionView.reloadData()
+            }
+        }
+    }
+    
+    // MARK: - Objc Methods:
+    @objc private func refreshCollection() {
+        viewModel?.fetchProducts()
     }
 }
 
 // MARK: - UICollectionViewDataSource:
 extension CatalogViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        10
+        viewModel?.productsObservable.wrappedValue.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -50,7 +82,9 @@ extension CatalogViewController: UICollectionViewDataSource {
             withReuseIdentifier: Resources.Identifiers.catalogCell,
             for: indexPath) as? CatalogCollectionViewCell else { return UICollectionViewCell() }
         
-        cell.backgroundColor = .gray
+        if let model = viewModel?.productsObservable.wrappedValue[indexPath.row] {
+            cell.setupProduct(model: model)
+        }
         
         return cell
     }
@@ -83,9 +117,10 @@ extension CatalogViewController: UICollectionViewDelegateFlowLayout {
 // MARK: - Setup Views:
 extension CatalogViewController {
     private func setupViews() {
-        view.backgroundColor = .white
+        view.backgroundColor = .greenDay
         
         view.addSubview(catalogCollectionView)
+        catalogCollectionView.addSubview(refreshControl)
     }
 }
 
@@ -98,5 +133,12 @@ extension CatalogViewController {
             catalogCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             catalogCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
         ])
+    }
+}
+
+// MARK: - Setup Targets:
+extension CatalogViewController {
+    private func setupTargets() {
+        refreshControl.addTarget(self, action: #selector(refreshCollection), for: .valueChanged)
     }
 }
