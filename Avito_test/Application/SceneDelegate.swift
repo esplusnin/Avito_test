@@ -20,7 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let catalogViewModel = CatalogViewModel(provider: dataProvider)
         let catalogViewController = CatalogViewController(viewModel: catalogViewModel)
         
-        window?.rootViewController = catalogViewController
+        window?.rootViewController = UINavigationController(rootViewController: catalogViewController)
         window?.makeKeyAndVisible()
     }
 }

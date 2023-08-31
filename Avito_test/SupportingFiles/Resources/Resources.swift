@@ -5,7 +5,7 @@
 //  Created by Евгений on 30.08.2023.
 //
 
-import Foundation
+import UIKit
 
 enum Resources {
     enum Identifiers {
@@ -19,5 +19,9 @@ enum Resources {
         static func getProductIDURL(itemID: String) -> String {
             "/s/interns-ios/details/" + itemID + ".json"
         }
+    }
+    
+    enum Images {
+        static let cancelButtonImage = UIImage(systemName: "minus.circle")?.withTintColor(.gray, renderingMode: .alwaysOriginal)
     }
 }

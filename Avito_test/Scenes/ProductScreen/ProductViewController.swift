@@ -128,6 +128,8 @@ private extension ProductViewController {
         }
         
         setupLabels()
+        navigationController?.navigationBar.topItem?.backButtonTitle = ""
+        navigationController?.navigationBar.tintColor = .blackDay
     }
     
     func setupLabels() {
@@ -177,7 +179,7 @@ extension ProductViewController {
             
             separator.heightAnchor.constraint(equalToConstant: 1),
             separator.widthAnchor.constraint(equalToConstant: view.frame.width - 10),
-            separator.topAnchor.constraint(equalTo: locationLabel.bottomAnchor, constant: UIConstants.sideInset),
+            separator.topAnchor.constraint(equalTo: locationLabel.bottomAnchor, constant: UIConstants.smallTopInset),
             separator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
             descriptionLabel.topAnchor.constraint(equalTo: separator.bottomAnchor, constant: 10),

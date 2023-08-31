@@ -19,7 +19,7 @@ final class CatalogViewController: UIViewController {
         static let cellHeight: CGFloat = 300
         static let numberOfLineInsets: CGFloat = 3
     }
-
+    
     // MARK: - UI:
     private lazy var catalogCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
@@ -32,8 +32,31 @@ final class CatalogViewController: UIViewController {
         return collectionView
     }()
     
+    private lazy var cancelButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.frame = CGRect(x: 0, y: 0, width: 10, height: 10)
+        button.setImage(Resources.Images.cancelButtonImage, for: .normal)
+        
+        return button
+    }()
+    
+    private lazy var searchTextField: UITextField = {
+        let textField = UITextField()
+        textField.delegate = self
+        textField.layer.cornerRadius = 10
+        textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textField.bounds.height))
+        textField.rightView = cancelButton
+        textField.leftViewMode = .always
+        textField.rightViewMode = .whileEditing
+        textField.backgroundColor = .lightGray
+        textField.placeholder = "Искать..."
+        textField.textColor = .blackDay
+        
+        return textField
+    }()
+    
     private lazy var refreshControl = UIRefreshControl()
-
+    
     // MARK: - Lifecycle:
     init(viewModel: CatalogViewModelProtocol) {
         self.viewModel = viewModel
@@ -55,6 +78,11 @@ final class CatalogViewController: UIViewController {
         blockUI()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupNavigationController()
+    }
+    
     // MARK: - Private Methods:
     private func bind() {
         viewModel?.productsObservable.bind { [weak self] _ in
@@ -72,15 +100,18 @@ final class CatalogViewController: UIViewController {
         let productViewModel = ProductViewModel(provider: dataProvider, productID: productID)
         let viewController = ProductViewController(viewModel: productViewModel)
         
-        viewController.modalPresentationStyle = .overFullScreen
-        
-        present(viewController, animated: true)
+        navigationController?.pushViewController(viewController, animated: true)
     }
     
     // MARK: - Objc Methods:
     @objc private func refreshCollection() {
         blockUI()
         viewModel?.fetchProducts()
+    }
+    
+    @objc private func cancelSearchTextField() {
+        searchTextField.text = .none
+        searchTextField.endEditing(true)
     }
 }
 
@@ -130,17 +161,40 @@ extension CatalogViewController: UICollectionViewDelegateFlowLayout {
         guard let advertisements = viewModel?.productsObservable.wrappedValue else { return }
         let productID = advertisements[indexPath.row].id
         
+        searchTextField.removeFromSuperview()
         switchToProductVC(productID: productID)
     }
 }
 
+extension CatalogViewController: UITextFieldDelegate {
+    
+}
+
 // MARK: - Setup Views:
-extension CatalogViewController {
-    private func setupViews() {
+private extension CatalogViewController {
+    func setupViews() {
         view.backgroundColor = .greenDay
         
         view.addSubview(catalogCollectionView)
         catalogCollectionView.addSubview(refreshControl)
+    }
+    
+    func setupNavigationController() {
+        guard let navigationBar = navigationController?.navigationBar else { return }
+        navigationBar.backgroundColor = .greenDay
+        navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationBar.shadowImage = UIImage()
+        
+        navigationBar.addSubview(searchTextField)
+        
+        searchTextField.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            searchTextField.topAnchor.constraint(equalTo: navigationBar.topAnchor, constant: 5),
+            searchTextField.leadingAnchor.constraint(equalTo: navigationBar.leadingAnchor, constant: 10),
+            searchTextField.trailingAnchor.constraint(equalTo: navigationBar.trailingAnchor, constant: -10),
+            searchTextField.heightAnchor.constraint(equalToConstant: 30)
+        ])
     }
 }
 
@@ -160,5 +214,6 @@ extension CatalogViewController {
 extension CatalogViewController {
     private func setupTargets() {
         refreshControl.addTarget(self, action: #selector(refreshCollection), for: .valueChanged)
+        cancelButton.addTarget(self, action: #selector(cancelSearchTextField), for: .touchUpInside)
     }
 }

@@ -186,6 +186,15 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
+		7E70CE052AA09DC200E10C2D /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				7E90D78F2A9F2F3A009F968D /* AppDelegate.swift */,
+				7E90D7912A9F2F3A009F968D /* SceneDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
 		7E90D7832A9F2F3A009F968D = {
 			isa = PBXGroup;
 			children = (
@@ -205,8 +214,7 @@
 		7E90D78E2A9F2F3A009F968D /* Avito_test */ = {
 			isa = PBXGroup;
 			children = (
-				7E90D78F2A9F2F3A009F968D /* AppDelegate.swift */,
-				7E90D7912A9F2F3A009F968D /* SceneDelegate.swift */,
+				7E70CE052AA09DC200E10C2D /* Application */,
 				7E70CDD92A9F459A00E10C2D /* Models */,
 				7E70CDD12A9F43CC00E10C2D /* Services */,
 				7E70CDF22AA05C1D00E10C2D /* Scenes */,
