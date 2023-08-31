@@ -25,6 +25,8 @@
 		7E70CDFC2AA07B8A00E10C2D /* BaseCustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E70CDFB2AA07B8A00E10C2D /* BaseCustomButton.swift */; };
 		7E70CE002AA08E5100E10C2D /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E70CDFF2AA08E5100E10C2D /* Product.swift */; };
 		7E70CE022AA099E600E10C2D /* UIViewController + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E70CE012AA099E600E10C2D /* UIViewController + Extension.swift */; };
+		7E70CE0E2AA0DFF700E10C2D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7E70CE102AA0DFF700E10C2D /* Localizable.strings */; };
+		7E70CE152AA0EE1000E10C2D /* LocalizableStrings+Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E70CE142AA0EE1000E10C2D /* LocalizableStrings+Generated.swift */; };
 		7E90D7902A9F2F3A009F968D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E90D78F2A9F2F3A009F968D /* AppDelegate.swift */; };
 		7E90D7922A9F2F3A009F968D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E90D7912A9F2F3A009F968D /* SceneDelegate.swift */; };
 		7E90D7942A9F2F3A009F968D /* CatalogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E90D7932A9F2F3A009F968D /* CatalogViewController.swift */; };
@@ -52,6 +54,9 @@
 		7E70CDFB2AA07B8A00E10C2D /* BaseCustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCustomButton.swift; sourceTree = "<group>"; };
 		7E70CDFF2AA08E5100E10C2D /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		7E70CE012AA099E600E10C2D /* UIViewController + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + Extension.swift"; sourceTree = "<group>"; };
+		7E70CE0F2AA0DFF700E10C2D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		7E70CE112AA0E01200E10C2D /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		7E70CE142AA0EE1000E10C2D /* LocalizableStrings+Generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "LocalizableStrings+Generated.swift"; path = "Avito_test/SupportingFiles/LocalizableStrings+Generated.swift"; sourceTree = SOURCE_ROOT; };
 		7E90D78C2A9F2F3A009F968D /* Avito_test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Avito_test.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E90D78F2A9F2F3A009F968D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7E90D7912A9F2F3A009F968D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -78,6 +83,7 @@
 		7E70CDCA2A9F411100E10C2D /* SupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
+				7E70CE0B2AA0DF1300E10C2D /* Localizable */,
 				7E70CDEF2AA057DD00E10C2D /* Extensions */,
 				7E70CDCB2A9F41BF00E10C2D /* Resources */,
 				7E90D7982A9F2F3B009F968D /* Assets.xcassets */,
@@ -195,6 +201,15 @@
 			path = Application;
 			sourceTree = "<group>";
 		};
+		7E70CE0B2AA0DF1300E10C2D /* Localizable */ = {
+			isa = PBXGroup;
+			children = (
+				7E70CE142AA0EE1000E10C2D /* LocalizableStrings+Generated.swift */,
+				7E70CE102AA0DFF700E10C2D /* Localizable.strings */,
+			);
+			path = Localizable;
+			sourceTree = "<group>";
+		};
 		7E90D7832A9F2F3A009F968D = {
 			isa = PBXGroup;
 			children = (
@@ -242,6 +257,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7E90D7A02A9F2F3B009F968D /* Build configuration list for PBXNativeTarget "Avito_test" */;
 			buildPhases = (
+				7E70CE132AA0ED3600E10C2D /* SwiftGen */,
 				7E90D7882A9F2F3A009F968D /* Sources */,
 				7E90D7892A9F2F3A009F968D /* Frameworks */,
 				7E90D78A2A9F2F3A009F968D /* Resources */,
@@ -280,6 +296,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ru,
 			);
 			mainGroup = 7E90D7832A9F2F3A009F968D;
 			packageReferences = (
@@ -300,11 +317,33 @@
 			buildActionMask = 2147483647;
 			files = (
 				7E90D79C2A9F2F3B009F968D /* LaunchScreen.storyboard in Resources */,
+				7E70CE0E2AA0DFF700E10C2D /* Localizable.strings in Resources */,
 				7E90D7992A9F2F3B009F968D /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		7E70CE132AA0ED3600E10C2D /* SwiftGen */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftGen;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\n\nif which swiftgen; then\n    swiftgen\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		7E90D7882A9F2F3A009F968D /* Sources */ = {
@@ -324,6 +363,7 @@
 				7E70CDD62A9F453F00E10C2D /* DataResult.swift in Sources */,
 				7E70CDE02A9F51DD00E10C2D /* DataProvider.swift in Sources */,
 				7E70CE022AA099E600E10C2D /* UIViewController + Extension.swift in Sources */,
+				7E70CE152AA0EE1000E10C2D /* LocalizableStrings+Generated.swift in Sources */,
 				7E70CDF12AA05B4000E10C2D /* UIColor + Extension.swift in Sources */,
 				7E90D7A72A9F39D5009F968D /* Resources.swift in Sources */,
 				7E70CDF62AA06DEC00E10C2D /* ProductViewModelProtocol.swift in Sources */,
@@ -339,6 +379,15 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		7E70CE102AA0DFF700E10C2D /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7E70CE0F2AA0DFF700E10C2D /* en */,
+				7E70CE112AA0E01200E10C2D /* ru */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		7E90D79A2A9F2F3B009F968D /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -354,6 +403,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -414,6 +464,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";

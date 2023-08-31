@@ -42,17 +42,25 @@ final class CatalogViewController: UIViewController {
     
     private lazy var searchTextField: UITextField = {
         let textField = UITextField()
-        textField.delegate = self
         textField.layer.cornerRadius = 10
         textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textField.bounds.height))
         textField.rightView = cancelButton
         textField.leftViewMode = .always
         textField.rightViewMode = .whileEditing
         textField.backgroundColor = .lightGray
-        textField.placeholder = "Искать..."
+        textField.placeholder = L10n.Catalog.searching
         textField.textColor = .blackDay
         
         return textField
+    }()
+    
+    private lazy var stumbLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = L10n.Catalog.noProducts
+        label.textColor = .blackDay
+        
+        return label
     }()
     
     private lazy var refreshControl = UIRefreshControl()
@@ -103,6 +111,15 @@ final class CatalogViewController: UIViewController {
         navigationController?.pushViewController(viewController, animated: true)
     }
     
+    private func setupStumbs() {
+        view.addSubview(stumbLabel)
+        
+        NSLayoutConstraint.activate([
+            stumbLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            stumbLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+        ])
+    }
+    
     // MARK: - Objc Methods:
     @objc private func refreshCollection() {
         blockUI()
@@ -112,13 +129,25 @@ final class CatalogViewController: UIViewController {
     @objc private func cancelSearchTextField() {
         searchTextField.text = .none
         searchTextField.endEditing(true)
+        viewModel?.sortProducts(by: "")
+    }
+    
+    @objc private func sortCollection() {
+        guard let text = searchTextField.text else { return }
+        viewModel?.sortProducts(by: text)
     }
 }
 
 // MARK: - UICollectionViewDataSource:
 extension CatalogViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        viewModel?.productsObservable.wrappedValue.count ?? 0
+        if viewModel?.productsObservable.wrappedValue.count == 0 {
+            setupStumbs()
+        } else {
+            stumbLabel.removeFromSuperview()
+        }
+        
+        return viewModel?.productsObservable.wrappedValue.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -166,10 +195,6 @@ extension CatalogViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
-extension CatalogViewController: UITextFieldDelegate {
-    
-}
-
 // MARK: - Setup Views:
 private extension CatalogViewController {
     func setupViews() {
@@ -215,5 +240,6 @@ extension CatalogViewController {
     private func setupTargets() {
         refreshControl.addTarget(self, action: #selector(refreshCollection), for: .valueChanged)
         cancelButton.addTarget(self, action: #selector(cancelSearchTextField), for: .touchUpInside)
+        searchTextField.addTarget(self, action: #selector(sortCollection), for: .allEditingEvents)
     }
 }

@@ -17,6 +17,8 @@ final class CatalogViewModel: CatalogViewModelProtocol {
         dataProvider
     }
     
+    private var unsortedProducts: Advertisements = []
+    
     // MARK: - Observable Values:
     var productsObservable: Observable<Advertisements> {
         $products
@@ -37,9 +39,26 @@ final class CatalogViewModel: CatalogViewModelProtocol {
             switch result {
             case .success(let products):
                 self.products = products
+                self.unsortedProducts = products
             case .failure(let error):
                 print(error)
             }
+        }
+    }
+    
+    func sortProducts(by name: String) {
+        if name == "" {
+            products = unsortedProducts
+        } else {
+            var newProducts: Advertisements = []
+            
+            for product in unsortedProducts {
+                if product.title.contains(name) {
+                    newProducts.append(product)
+                }
+            }
+            
+            products = newProducts
         }
     }
 }

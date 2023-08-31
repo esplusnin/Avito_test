@@ -19,8 +19,7 @@ final class CatalogCollectionViewCell: UICollectionViewCell {
             
             productImageView.kf.indicatorType = .activity
             productImageView.kf.setImage(with: imageURL, options: [.processor(processor),
-                                                                   .transition(.fade(1)),
-                                                                   .cacheOriginalImage])
+                                                                   .transition(.fade(1))])
             titleLabel.text = productModel.title
             priceLabel.text = productModel.price
             geoLabel.text = productModel.location

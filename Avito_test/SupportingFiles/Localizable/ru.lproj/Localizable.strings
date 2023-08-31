@@ -1,0 +1,18 @@
+/* 
+  Localizable.strings
+  Avito_test
+
+  Created by Евгений on 31.08.2023.
+  
+*/
+
+// MARK: - Catalog Screen:
+"catalog.searching" = "Искать по названию...";
+"catalog.noProducts" = "Упс, кажется ничего нет 🥹";
+
+// MARK: - Product Screen:
+"product.advertisementFrom" = "Обьявление от";
+
+// MARK: BaseCustomButton:
+"baseButton.call" = "📞 Позвонить";
+"baseButton.write" = "💬 Написать";

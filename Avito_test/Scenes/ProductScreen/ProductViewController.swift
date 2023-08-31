@@ -27,7 +27,7 @@ final class ProductViewController: UIViewController {
             geoLabel.text = productModel.location
             locationLabel.text = productModel.address
             descriptionLabel.text = productModel.description
-            advertiseDate.text = "Обьявление от \(productModel.createdDate)"
+            advertiseDate.text =  L10n.Product.advertisementFrom + " \(productModel.createdDate)"
             
             clearViewsBackground()
         }

@@ -51,11 +51,11 @@ final class BaseCustomButton: UIButton {
         switch stateButton {
         case .call:
             backgroundColor = .lightGreen
-            setTitle("📞 Позвонить", for: .normal)
+            setTitle(L10n.BaseButton.call, for: .normal)
             titleLabel?.font = .titleFont
         case .write:
             backgroundColor = .lightBlue
-            setTitle("💬 Написать", for: .normal)
+            setTitle(L10n.BaseButton.write, for: .normal)
             titleLabel?.font = .titleFont
         }
     }
