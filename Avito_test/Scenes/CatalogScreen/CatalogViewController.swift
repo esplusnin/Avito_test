@@ -10,7 +10,7 @@ import UIKit
 final class CatalogViewController: UIViewController {
     
     // MARK: - Dependencies:
-    let viewModel: CatalogViewModelProtocol?
+    private let viewModel: CatalogViewModelProtocol?
     
     // MARK: - Constants and Variables:
     enum UIConstants {
@@ -52,6 +52,7 @@ final class CatalogViewController: UIViewController {
         
         bind()
         viewModel?.fetchProducts()
+        blockUI()
     }
     
     // MARK: - Private Methods:
@@ -61,12 +62,24 @@ final class CatalogViewController: UIViewController {
             DispatchQueue.main.async {
                 self.refreshControl.endRefreshing()
                 self.catalogCollectionView.reloadData()
+                self.unblockUI()
             }
         }
     }
     
+    private func switchToProductVC(productID: String) {
+        let dataProvider = viewModel?.provider
+        let productViewModel = ProductViewModel(provider: dataProvider, productID: productID)
+        let viewController = ProductViewController(viewModel: productViewModel)
+        
+        viewController.modalPresentationStyle = .overFullScreen
+        
+        present(viewController, animated: true)
+    }
+    
     // MARK: - Objc Methods:
     @objc private func refreshCollection() {
+        blockUI()
         viewModel?.fetchProducts()
     }
 }
@@ -111,6 +124,13 @@ extension CatalogViewController: UICollectionViewDelegateFlowLayout {
         let inset = UIConstants.defaultInset
         
         return UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let advertisements = viewModel?.productsObservable.wrappedValue else { return }
+        let productID = advertisements[indexPath.row].id
+        
+        switchToProductVC(productID: productID)
     }
 }
 

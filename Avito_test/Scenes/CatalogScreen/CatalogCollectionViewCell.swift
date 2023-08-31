@@ -11,20 +11,20 @@ import Kingfisher
 final class CatalogCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Constants and Variables:
-    private var product: Advertisement? {
+    private var productModel: Advertisement? {
         didSet {
-            guard let product,
-                  let imageURL = URL(string: product.imageURL) else { return }
+            guard let productModel,
+                  let imageURL = URL(string: productModel.imageURL) else { return }
             let processor = RoundCornerImageProcessor(cornerRadius: 100)
             
             productImageView.kf.indicatorType = .activity
             productImageView.kf.setImage(with: imageURL, options: [.processor(processor),
                                                                    .transition(.fade(1)),
                                                                    .cacheOriginalImage])
-            titleLabel.text = product.title
-            priceLabel.text = product.price
-            geoLabel.text = product.location
-            dateLabel.text = product.createdDate
+            titleLabel.text = productModel.title
+            priceLabel.text = productModel.price
+            geoLabel.text = productModel.location
+            dateLabel.text = productModel.createdDate
         }
     }
         
@@ -32,7 +32,7 @@ final class CatalogCollectionViewCell: UICollectionViewCell {
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
-        label.font = .titleFont
+        label.font = .bodyTitleFont
         label.textColor = .blackDay
         
         return label
@@ -40,7 +40,7 @@ final class CatalogCollectionViewCell: UICollectionViewCell {
     
     private lazy var priceLabel: UILabel = {
         let label = UILabel()
-        label.font = .mediumFont
+        label.font = .bodyMediumFont
         label.textColor = .blackDay
         
         return label
@@ -63,14 +63,14 @@ final class CatalogCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Public Methods:
     func setupProduct(model: Advertisement) {
-        product = model
+        productModel = model
     }
 }
 
 // MARK: - Setup Views:
 private extension CatalogCollectionViewCell {
     func setupViews() {
-        [productImageView, titleLabel, priceLabel, geoLabel, dateLabel].forEach { view in
+        [titleLabel, priceLabel, productImageView, geoLabel, dateLabel].forEach { view in
             addSubview(view)
             view.translatesAutoresizingMaskIntoConstraints = false
         }
@@ -80,7 +80,7 @@ private extension CatalogCollectionViewCell {
     
     func setupLabels() {
         [geoLabel, dateLabel].forEach { label in
-            label.font = .metaFont
+            label.font = .bodyMetaFont
             label.textColor = .gray
         }
     }

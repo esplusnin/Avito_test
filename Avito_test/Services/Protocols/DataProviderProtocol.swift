@@ -9,4 +9,5 @@ import Foundation
 
 protocol DataProviderProtocol: AnyObject {
     func fetchAdvertisement(completion: @escaping (Result<Advertisements, Error>) -> Void)
+    func fetchProduct(itemID: String, completion: @escaping (Result<Product, Error>) -> Void)
 }

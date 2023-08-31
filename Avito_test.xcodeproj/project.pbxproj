@@ -19,6 +19,12 @@
 		7E70CDEC2A9F6CFA00E10C2D /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 7E70CDEB2A9F6CFA00E10C2D /* Kingfisher */; };
 		7E70CDEE2AA0573100E10C2D /* UIFont + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E70CDED2AA0573100E10C2D /* UIFont + Extension.swift */; };
 		7E70CDF12AA05B4000E10C2D /* UIColor + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E70CDF02AA05B4000E10C2D /* UIColor + Extension.swift */; };
+		7E70CDF42AA06C0300E10C2D /* ProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E70CDF32AA06C0300E10C2D /* ProductViewController.swift */; };
+		7E70CDF62AA06DEC00E10C2D /* ProductViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E70CDF52AA06DEC00E10C2D /* ProductViewModelProtocol.swift */; };
+		7E70CDF82AA06E1100E10C2D /* ProductViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E70CDF72AA06E1100E10C2D /* ProductViewModel.swift */; };
+		7E70CDFC2AA07B8A00E10C2D /* BaseCustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E70CDFB2AA07B8A00E10C2D /* BaseCustomButton.swift */; };
+		7E70CE002AA08E5100E10C2D /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E70CDFF2AA08E5100E10C2D /* Product.swift */; };
+		7E70CE022AA099E600E10C2D /* UIViewController + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E70CE012AA099E600E10C2D /* UIViewController + Extension.swift */; };
 		7E90D7902A9F2F3A009F968D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E90D78F2A9F2F3A009F968D /* AppDelegate.swift */; };
 		7E90D7922A9F2F3A009F968D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E90D7912A9F2F3A009F968D /* SceneDelegate.swift */; };
 		7E90D7942A9F2F3A009F968D /* CatalogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E90D7932A9F2F3A009F968D /* CatalogViewController.swift */; };
@@ -40,6 +46,12 @@
 		7E70CDE82A9F69DA00E10C2D /* DataProviderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProviderProtocol.swift; sourceTree = "<group>"; };
 		7E70CDED2AA0573100E10C2D /* UIFont + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont + Extension.swift"; sourceTree = "<group>"; };
 		7E70CDF02AA05B4000E10C2D /* UIColor + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + Extension.swift"; sourceTree = "<group>"; };
+		7E70CDF32AA06C0300E10C2D /* ProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductViewController.swift; sourceTree = "<group>"; };
+		7E70CDF52AA06DEC00E10C2D /* ProductViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductViewModelProtocol.swift; sourceTree = "<group>"; };
+		7E70CDF72AA06E1100E10C2D /* ProductViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductViewModel.swift; sourceTree = "<group>"; };
+		7E70CDFB2AA07B8A00E10C2D /* BaseCustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCustomButton.swift; sourceTree = "<group>"; };
+		7E70CDFF2AA08E5100E10C2D /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
+		7E70CE012AA099E600E10C2D /* UIViewController + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + Extension.swift"; sourceTree = "<group>"; };
 		7E90D78C2A9F2F3A009F968D /* Avito_test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Avito_test.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E90D78F2A9F2F3A009F968D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7E90D7912A9F2F3A009F968D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -107,6 +119,7 @@
 			children = (
 				7E70CDD72A9F454F00E10C2D /* Advertisement.swift */,
 				7E70CDD52A9F453F00E10C2D /* DataResult.swift */,
+				7E70CDFF2AA08E5100E10C2D /* Product.swift */,
 				7E70CDE52A9F678300E10C2D /* Observable.swift */,
 			);
 			path = Models;
@@ -125,6 +138,7 @@
 			children = (
 				7E70CDED2AA0573100E10C2D /* UIFont + Extension.swift */,
 				7E70CDF02AA05B4000E10C2D /* UIColor + Extension.swift */,
+				7E70CE012AA099E600E10C2D /* UIViewController + Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -133,8 +147,43 @@
 			isa = PBXGroup;
 			children = (
 				7E90D7A32A9F3327009F968D /* CatalogScreen */,
+				7E70CDFA2AA0709A00E10C2D /* ProductScreen */,
 			);
 			path = Scenes;
+			sourceTree = "<group>";
+		};
+		7E70CDF92AA0708F00E10C2D /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				7E70CDF52AA06DEC00E10C2D /* ProductViewModelProtocol.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		7E70CDFA2AA0709A00E10C2D /* ProductScreen */ = {
+			isa = PBXGroup;
+			children = (
+				7E70CDF92AA0708F00E10C2D /* Protocols */,
+				7E70CDF72AA06E1100E10C2D /* ProductViewModel.swift */,
+				7E70CDF32AA06C0300E10C2D /* ProductViewController.swift */,
+			);
+			path = ProductScreen;
+			sourceTree = "<group>";
+		};
+		7E70CDFD2AA07BA300E10C2D /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				7E70CDFB2AA07B8A00E10C2D /* BaseCustomButton.swift */,
+			);
+			path = Buttons;
+			sourceTree = "<group>";
+		};
+		7E70CDFE2AA07BA800E10C2D /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				7E70CDFD2AA07BA300E10C2D /* Buttons */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 		7E90D7832A9F2F3A009F968D = {
@@ -162,6 +211,7 @@
 				7E70CDD12A9F43CC00E10C2D /* Services */,
 				7E70CDF22AA05C1D00E10C2D /* Scenes */,
 				7E70CDCA2A9F411100E10C2D /* SupportingFiles */,
+				7E70CDFE2AA07BA800E10C2D /* Components */,
 			);
 			path = Avito_test;
 			sourceTree = "<group>";
@@ -256,19 +306,25 @@
 				7E70CDEE2AA0573100E10C2D /* UIFont + Extension.swift in Sources */,
 				7E70CDE62A9F678300E10C2D /* Observable.swift in Sources */,
 				7E70CDE22A9F672200E10C2D /* CatalogViewModel.swift in Sources */,
+				7E70CDFC2AA07B8A00E10C2D /* BaseCustomButton.swift in Sources */,
 				7E70CDD32A9F43E900E10C2D /* NetworkClientServiceProtocol.swift in Sources */,
+				7E70CDF42AA06C0300E10C2D /* ProductViewController.swift in Sources */,
+				7E70CDF82AA06E1100E10C2D /* ProductViewModel.swift in Sources */,
 				7E90D7A52A9F3340009F968D /* CatalogCollectionViewCell.swift in Sources */,
 				7E90D7942A9F2F3A009F968D /* CatalogViewController.swift in Sources */,
 				7E90D7902A9F2F3A009F968D /* AppDelegate.swift in Sources */,
 				7E70CDD62A9F453F00E10C2D /* DataResult.swift in Sources */,
 				7E70CDE02A9F51DD00E10C2D /* DataProvider.swift in Sources */,
+				7E70CE022AA099E600E10C2D /* UIViewController + Extension.swift in Sources */,
 				7E70CDF12AA05B4000E10C2D /* UIColor + Extension.swift in Sources */,
 				7E90D7A72A9F39D5009F968D /* Resources.swift in Sources */,
+				7E70CDF62AA06DEC00E10C2D /* ProductViewModelProtocol.swift in Sources */,
 				7E90D7922A9F2F3A009F968D /* SceneDelegate.swift in Sources */,
 				7E70CDE92A9F69DA00E10C2D /* DataProviderProtocol.swift in Sources */,
 				7E70CDD02A9F43C900E10C2D /* NetworkClientService.swift in Sources */,
 				7E70CDE42A9F672C00E10C2D /* CatalogViewModelProtocol.swift in Sources */,
 				7E70CDD82A9F454F00E10C2D /* Advertisement.swift in Sources */,
+				7E70CE002AA08E5100E10C2D /* Product.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

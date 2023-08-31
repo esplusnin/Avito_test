@@ -10,7 +10,12 @@ import Foundation
 final class CatalogViewModel: CatalogViewModelProtocol {
     
     // MARK: - Dependencies:
-    let dataProvider: DataProviderProtocol
+    private let dataProvider: DataProviderProtocol
+    
+    // MARK: - Constants and Variables:
+    var provider: DataProviderProtocol {
+        dataProvider
+    }
     
     // MARK: - Observable Values:
     var productsObservable: Observable<Advertisements> {

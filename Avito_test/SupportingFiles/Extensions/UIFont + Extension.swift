@@ -8,7 +8,11 @@
 import UIKit
 
 extension UIFont {
-    static let titleFont = UIFont.systemFont(ofSize: 16)
-    static let mediumFont = UIFont.boldSystemFont(ofSize: 16)
-    static let metaFont = UIFont.systemFont(ofSize: 14)
+    static let bodyTitleFont = UIFont.boldSystemFont(ofSize: 16)
+    static let bodyMediumFont = UIFont.systemFont(ofSize: 16)
+    static let bodyMetaFont = UIFont.systemFont(ofSize: 14)
+    
+    static let titleFont = UIFont.boldSystemFont(ofSize: 24)
+    static let mediumFont = UIFont.systemFont(ofSize: 24)
+    static let metaFont = UIFont.systemFont(ofSize: 18)
 }

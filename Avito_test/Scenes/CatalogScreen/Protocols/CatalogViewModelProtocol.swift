@@ -8,6 +8,7 @@
 import Foundation
 
 protocol CatalogViewModelProtocol: AnyObject {
+    var provider: DataProviderProtocol { get }
     var productsObservable: Observable<Advertisements> { get }
     func fetchProducts()
 }

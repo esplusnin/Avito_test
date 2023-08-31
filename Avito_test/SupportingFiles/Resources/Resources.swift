@@ -15,5 +15,9 @@ enum Resources {
     enum Network {
         static let defaultURL = "https://www.avito.st"
         static let mainCatalogURL = "/s/interns-ios/main-page.json"
+        
+        static func getProductIDURL(itemID: String) -> String {
+            "/s/interns-ios/details/" + itemID + ".json"
+        }
     }
 }

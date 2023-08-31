@@ -15,7 +15,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: scene)
         
-        let dataProvider = DataProvider()
+        let networkClient = NetworkClientService()
+        let dataProvider = DataProvider(networkClient: networkClient)
         let catalogViewModel = CatalogViewModel(provider: dataProvider)
         let catalogViewController = CatalogViewController(viewModel: catalogViewModel)
         
