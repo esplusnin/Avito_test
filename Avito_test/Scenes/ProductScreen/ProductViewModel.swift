@@ -12,6 +12,10 @@ final class ProductViewModel: ProductViewModelProtocol {
     // MARK: - Dependencies:
     private let dataProvider: DataProviderProtocol?
     
+    // MARK: - Classes:
+    private var dateFormatterService: DateFormatService?
+    private var currencyFormatterService: CurrencyFormatterService?
+    
     // MARK: - Constants and Variables:
     private var productID: String
     
@@ -23,7 +27,7 @@ final class ProductViewModel: ProductViewModelProtocol {
     var errorStringObservable: Observable<String?> {
         $errorString
     }
-
+    
     @Observable
     private(set) var product: Product?
     
@@ -42,11 +46,36 @@ final class ProductViewModel: ProductViewModelProtocol {
             guard let self else { return }
             switch result {
             case .success(let product):
-                self.product = product
+                let newProduct = updateProductsInfo(with: product)
+                self.product = newProduct
             case .failure(let error):
                 let errorString = HandlingErrorService().handlingHTTPStatusCodeError(error: error)
                 self.errorString = errorString
             }
         }
+    }
+    
+    // MARK: - Private Methods:
+    private func updateProductsInfo(with product: Product) -> Product {
+        dateFormatterService = DateFormatService()
+        currencyFormatterService = CurrencyFormatterService()
+        
+        let oldDate = product.createdDate
+        let newDate = dateFormatterService?.getAdaptedDateString(from: oldDate) ?? ""
+        let newPrice = currencyFormatterService?.getAdaptedCurrencyString(from: product.price) ?? ""
+        
+        dateFormatterService = nil
+        currencyFormatterService = nil
+        
+        return Product(id: product.id,
+                       title: product.title,
+                       price: newPrice,
+                       location: product.location,
+                       imageURL: product.imageURL,
+                       createdDate: newDate,
+                       description: product.description,
+                       email: product.email,
+                       phoneNumber: product.phoneNumber,
+                       address: product.address)
     }
 }

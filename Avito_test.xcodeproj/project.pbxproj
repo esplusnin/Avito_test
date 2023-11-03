@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7E39EB402AF4F3AE00E59626 /* DateFormatService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E39EB3F2AF4F3AE00E59626 /* DateFormatService.swift */; };
+		7E39EB432AF4FA4600E59626 /* CurrencyFormatterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E39EB422AF4FA4600E59626 /* CurrencyFormatterService.swift */; };
 		7E70CDD02A9F43C900E10C2D /* NetworkClientService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E70CDCF2A9F43C900E10C2D /* NetworkClientService.swift */; };
 		7E70CDD32A9F43E900E10C2D /* NetworkClientServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E70CDD22A9F43E900E10C2D /* NetworkClientServiceProtocol.swift */; };
 		7E70CDD62A9F453F00E10C2D /* DataResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E70CDD52A9F453F00E10C2D /* DataResult.swift */; };
@@ -45,6 +46,7 @@
 
 /* Begin PBXFileReference section */
 		7E39EB3F2AF4F3AE00E59626 /* DateFormatService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatService.swift; sourceTree = "<group>"; };
+		7E39EB422AF4FA4600E59626 /* CurrencyFormatterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyFormatterService.swift; sourceTree = "<group>"; };
 		7E70CDCF2A9F43C900E10C2D /* NetworkClientService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClientService.swift; sourceTree = "<group>"; };
 		7E70CDD22A9F43E900E10C2D /* NetworkClientServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClientServiceProtocol.swift; sourceTree = "<group>"; };
 		7E70CDD52A9F453F00E10C2D /* DataResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataResult.swift; sourceTree = "<group>"; };
@@ -97,6 +99,7 @@
 		7E39EB412AF4F3B300E59626 /* Formatters */ = {
 			isa = PBXGroup;
 			children = (
+				7E39EB422AF4FA4600E59626 /* CurrencyFormatterService.swift */,
 				7E39EB3F2AF4F3AE00E59626 /* DateFormatService.swift */,
 			);
 			path = Formatters;
@@ -412,6 +415,7 @@
 				7E90D7902A9F2F3A009F968D /* AppDelegate.swift in Sources */,
 				7E70CDD62A9F453F00E10C2D /* DataResult.swift in Sources */,
 				7E70CDE02A9F51DD00E10C2D /* DataProvider.swift in Sources */,
+				7E39EB432AF4FA4600E59626 /* CurrencyFormatterService.swift in Sources */,
 				7E70CE022AA099E600E10C2D /* UIViewController + Extension.swift in Sources */,
 				7E70CE152AA0EE1000E10C2D /* LocalizableStrings+Generated.swift in Sources */,
 				7E70CDF12AA05B4000E10C2D /* UIColor + Extension.swift in Sources */,

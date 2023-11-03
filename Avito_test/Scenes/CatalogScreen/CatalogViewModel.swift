@@ -12,8 +12,9 @@ final class CatalogViewModel: CatalogViewModelProtocol {
     // MARK: - Dependencies:
     private let dataProvider: DataProviderProtocol
     
-    // MARK: - Constants and Variables:
+    // MARK: - Classes:
     private var dateFormatterService: DateFormatService?
+    private var currencyFormatterService: CurrencyFormatterService?
     
     // MARK: - Constants and Variables:
     var provider: DataProviderProtocol {
@@ -48,7 +49,7 @@ final class CatalogViewModel: CatalogViewModelProtocol {
             guard let self else { return }
             switch result {
             case .success(let products):
-                let newProducts = updateProductsWithNormalDate(with: products)
+                let newProducts = updateProductsInfo(with: products)
                 self.products = newProducts
                 self.unsortedProducts = newProducts
             case .failure(let error):
@@ -75,24 +76,27 @@ final class CatalogViewModel: CatalogViewModelProtocol {
     }
     
     // MARK: - Private Methods:
-    private func updateProductsWithNormalDate(with products: Advertisements) -> Advertisements {
+    private func updateProductsInfo(with products: Advertisements) -> Advertisements {
         dateFormatterService = DateFormatService()
+        currencyFormatterService = CurrencyFormatterService()
         
         var newProducts = Advertisements()
         
         products.forEach { product in
             let oldDate = product.createdDate
-            let newDate = dateFormatterService?.aduptDateString(from: oldDate) ?? ""
+            let newDate = dateFormatterService?.getAdaptedDateString(from: oldDate) ?? ""
+            let newPrice = currencyFormatterService?.getAdaptedCurrencyString(from: product.price)
             
             newProducts.append(Advertisement(id: product.id,
                                              title: product.title,
-                                             price: product.price,
+                                             price: newPrice ?? "",
                                              location: product.location,
                                              imageURL: product.imageURL,
                                              createdDate: newDate))
         }
         
         dateFormatterService = nil
+        currencyFormatterService = nil
         
         return newProducts
     }

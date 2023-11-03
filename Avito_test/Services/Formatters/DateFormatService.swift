@@ -1,9 +1,12 @@
 import Foundation
 
 final class DateFormatService {
+    
+    // MARK: - Classes:
     let formatter = DateFormatter()
     
-    func aduptDateString(from string: String) -> String {
+    // MARK: - Public Methods:
+    func getAdaptedDateString(from string: String) -> String {
         var dateString = ""
         formatter.dateFormat = "yyyy-mm-dd"
         
