@@ -44,7 +44,6 @@ final class ProductViewModel: ProductViewModelProtocol {
             case .success(let product):
                 self.product = product
             case .failure(let error):
-                print("FAILURE")
                 let errorString = HandlingErrorService().handlingHTTPStatusCodeError(error: error)
                 self.errorString = errorString
             }

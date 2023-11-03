@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7E39EB402AF4F3AE00E59626 /* DateFormatService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E39EB3F2AF4F3AE00E59626 /* DateFormatService.swift */; };
 		7E70CDD02A9F43C900E10C2D /* NetworkClientService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E70CDCF2A9F43C900E10C2D /* NetworkClientService.swift */; };
 		7E70CDD32A9F43E900E10C2D /* NetworkClientServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E70CDD22A9F43E900E10C2D /* NetworkClientServiceProtocol.swift */; };
 		7E70CDD62A9F453F00E10C2D /* DataResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E70CDD52A9F453F00E10C2D /* DataResult.swift */; };
@@ -43,6 +44,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7E39EB3F2AF4F3AE00E59626 /* DateFormatService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatService.swift; sourceTree = "<group>"; };
 		7E70CDCF2A9F43C900E10C2D /* NetworkClientService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClientService.swift; sourceTree = "<group>"; };
 		7E70CDD22A9F43E900E10C2D /* NetworkClientServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClientServiceProtocol.swift; sourceTree = "<group>"; };
 		7E70CDD52A9F453F00E10C2D /* DataResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataResult.swift; sourceTree = "<group>"; };
@@ -92,6 +94,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7E39EB412AF4F3B300E59626 /* Formatters */ = {
+			isa = PBXGroup;
+			children = (
+				7E39EB3F2AF4F3AE00E59626 /* DateFormatService.swift */,
+			);
+			path = Formatters;
+			sourceTree = "<group>";
+		};
 		7E70CDCA2A9F411100E10C2D /* SupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
@@ -118,6 +128,7 @@
 			isa = PBXGroup;
 			children = (
 				7E70CE292AA1262C00E10C2D /* Network */,
+				7E39EB412AF4F3B300E59626 /* Formatters */,
 				7E70CE1B2AA0F59C00E10C2D /* AlertService.swift */,
 			);
 			path = Services;
@@ -391,6 +402,7 @@
 				7E70CDEE2AA0573100E10C2D /* UIFont + Extension.swift in Sources */,
 				7E70CDE62A9F678300E10C2D /* Observable.swift in Sources */,
 				7E70CDE22A9F672200E10C2D /* CatalogViewModel.swift in Sources */,
+				7E39EB402AF4F3AE00E59626 /* DateFormatService.swift in Sources */,
 				7E70CDFC2AA07B8A00E10C2D /* BaseCustomButton.swift in Sources */,
 				7E70CDD32A9F43E900E10C2D /* NetworkClientServiceProtocol.swift in Sources */,
 				7E70CDF42AA06C0300E10C2D /* ProductViewController.swift in Sources */,

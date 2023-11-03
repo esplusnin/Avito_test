@@ -13,6 +13,9 @@ final class CatalogViewModel: CatalogViewModelProtocol {
     private let dataProvider: DataProviderProtocol
     
     // MARK: - Constants and Variables:
+    private var dateFormatterService: DateFormatService?
+    
+    // MARK: - Constants and Variables:
     var provider: DataProviderProtocol {
         dataProvider
     }
@@ -45,8 +48,9 @@ final class CatalogViewModel: CatalogViewModelProtocol {
             guard let self else { return }
             switch result {
             case .success(let products):
-                self.products = products
-                self.unsortedProducts = products
+                let newProducts = updateProductsWithNormalDate(with: products)
+                self.products = newProducts
+                self.unsortedProducts = newProducts
             case .failure(let error):
                 let errorString = HandlingErrorService().handlingHTTPStatusCodeError(error: error)
                 self.errorString = errorString
@@ -68,5 +72,28 @@ final class CatalogViewModel: CatalogViewModelProtocol {
             
             products = newProducts
         }
+    }
+    
+    // MARK: - Private Methods:
+    private func updateProductsWithNormalDate(with products: Advertisements) -> Advertisements {
+        dateFormatterService = DateFormatService()
+        
+        var newProducts = Advertisements()
+        
+        products.forEach { product in
+            let oldDate = product.createdDate
+            let newDate = dateFormatterService?.aduptDateString(from: oldDate) ?? ""
+            
+            newProducts.append(Advertisement(id: product.id,
+                                             title: product.title,
+                                             price: product.price,
+                                             location: product.location,
+                                             imageURL: product.imageURL,
+                                             createdDate: newDate))
+        }
+        
+        dateFormatterService = nil
+        
+        return newProducts
     }
 }
