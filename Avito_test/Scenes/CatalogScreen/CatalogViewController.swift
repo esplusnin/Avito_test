@@ -14,10 +14,18 @@ final class CatalogViewController: UIViewController {
     
     // MARK: - Constants and Variables:
     enum UIConstants {
-        static let numberOfCells: CGFloat = 2
+        static let smallInset: CGFloat = 5
         static let defaultInset: CGFloat = 10
-        static let cellHeight: CGFloat = 300
+        
         static let numberOfLineInsets: CGFloat = 3
+        static let numberOfCells: CGFloat = 2
+        
+        static let cellHeight: CGFloat = 300
+        static let searchTextFieldHeight: CGFloat = 30
+        static let buttonSide: CGFloat = 10
+        static let searchTextFieldInsideViewSide: CGFloat = 10
+        
+        static let searchTextFieldCornerRadius: CGFloat = 10
     }
     
     // MARK: - UI:
@@ -34,7 +42,7 @@ final class CatalogViewController: UIViewController {
     
     private lazy var cancelButton: UIButton = {
         let button = UIButton(type: .system)
-        button.frame = CGRect(x: 0, y: 0, width: 10, height: 10)
+        button.frame = CGRect(x: 0, y: 0, width: UIConstants.buttonSide, height: UIConstants.buttonSide)
         button.setImage(Resources.Images.cancelButtonImage, for: .normal)
         
         return button
@@ -42,8 +50,8 @@ final class CatalogViewController: UIViewController {
     
     private lazy var searchTextField: UITextField = {
         let textField = UITextField()
-        textField.layer.cornerRadius = 10
-        textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textField.bounds.height))
+        textField.layer.cornerRadius = UIConstants.searchTextFieldCornerRadius
+        textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: UIConstants.searchTextFieldInsideViewSide, height: textField.bounds.height))
         textField.rightView = cancelButton
         textField.leftViewMode = .always
         textField.rightViewMode = .whileEditing
@@ -226,10 +234,10 @@ private extension CatalogViewController {
         searchTextField.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            searchTextField.topAnchor.constraint(equalTo: navigationBar.topAnchor, constant: 5),
-            searchTextField.leadingAnchor.constraint(equalTo: navigationBar.leadingAnchor, constant: 10),
-            searchTextField.trailingAnchor.constraint(equalTo: navigationBar.trailingAnchor, constant: -10),
-            searchTextField.heightAnchor.constraint(equalToConstant: 30)
+            searchTextField.topAnchor.constraint(equalTo: navigationBar.topAnchor, constant: UIConstants.smallInset),
+            searchTextField.leadingAnchor.constraint(equalTo: navigationBar.leadingAnchor, constant: UIConstants.defaultInset),
+            searchTextField.trailingAnchor.constraint(equalTo: navigationBar.trailingAnchor, constant: -UIConstants.defaultInset),
+            searchTextField.heightAnchor.constraint(equalToConstant: UIConstants.searchTextFieldHeight)
         ])
     }
 }
