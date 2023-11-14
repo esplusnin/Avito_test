@@ -43,6 +43,9 @@
 		7E90D79C2A9F2F3B009F968D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E90D79A2A9F2F3B009F968D /* LaunchScreen.storyboard */; };
 		7E90D7A52A9F3340009F968D /* CatalogCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E90D7A42A9F3340009F968D /* CatalogCollectionViewCell.swift */; };
 		7E90D7A72A9F39D5009F968D /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E90D7A62A9F39D5009F968D /* Resources.swift */; };
+		7EEB4DC62B0357AE004BD3C8 /* CustomCollectionViewCompositionalLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EEB4DC52B0357AE004BD3C8 /* CustomCollectionViewCompositionalLayout.swift */; };
+		7EEB4DC92B03634A004BD3C8 /* UIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EEB4DC82B03634A004BD3C8 /* UIConstants.swift */; };
+		7EEB4DCB2B0385D7004BD3C8 /* CatalogCollectionViewFilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EEB4DCA2B0385D7004BD3C8 /* CatalogCollectionViewFilterCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -82,6 +85,9 @@
 		7E90D79D2A9F2F3B009F968D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7E90D7A42A9F3340009F968D /* CatalogCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogCollectionViewCell.swift; sourceTree = "<group>"; };
 		7E90D7A62A9F39D5009F968D /* Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
+		7EEB4DC52B0357AE004BD3C8 /* CustomCollectionViewCompositionalLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCollectionViewCompositionalLayout.swift; sourceTree = "<group>"; };
+		7EEB4DC82B03634A004BD3C8 /* UIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIConstants.swift; sourceTree = "<group>"; };
+		7EEB4DCA2B0385D7004BD3C8 /* CatalogCollectionViewFilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogCollectionViewFilterCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +131,7 @@
 			children = (
 				7E70CE262AA121C400E10C2D /* Animation */,
 				7E90D7A62A9F39D5009F968D /* Resources.swift */,
+				7EEB4DC82B03634A004BD3C8 /* UIConstants.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -292,11 +299,21 @@
 			isa = PBXGroup;
 			children = (
 				7E70CDE72A9F67B200E10C2D /* Protocols */,
+				7EEB4DC72B0357B2004BD3C8 /* UI */,
 				7E70CDE12A9F672200E10C2D /* CatalogViewModel.swift */,
 				7E90D7932A9F2F3A009F968D /* CatalogViewController.swift */,
-				7E90D7A42A9F3340009F968D /* CatalogCollectionViewCell.swift */,
 			);
 			path = CatalogScreen;
+			sourceTree = "<group>";
+		};
+		7EEB4DC72B0357B2004BD3C8 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				7EEB4DC52B0357AE004BD3C8 /* CustomCollectionViewCompositionalLayout.swift */,
+				7E90D7A42A9F3340009F968D /* CatalogCollectionViewCell.swift */,
+				7EEB4DCA2B0385D7004BD3C8 /* CatalogCollectionViewFilterCell.swift */,
+			);
+			path = UI;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -412,12 +429,14 @@
 				7E70CDFC2AA07B8A00E10C2D /* BaseCustomButton.swift in Sources */,
 				7E70CDD32A9F43E900E10C2D /* NetworkClientServiceProtocol.swift in Sources */,
 				7E70CDF42AA06C0300E10C2D /* ProductViewController.swift in Sources */,
+				7EEB4DCB2B0385D7004BD3C8 /* CatalogCollectionViewFilterCell.swift in Sources */,
 				7E39EB452AF51E9A00E59626 /* CustomCollectionViewCompositonLayout.swift in Sources */,
 				7E70CDF82AA06E1100E10C2D /* ProductViewModel.swift in Sources */,
 				7E90D7A52A9F3340009F968D /* CatalogCollectionViewCell.swift in Sources */,
 				7E90D7942A9F2F3A009F968D /* CatalogViewController.swift in Sources */,
 				7E90D7902A9F2F3A009F968D /* AppDelegate.swift in Sources */,
 				7E70CDD62A9F453F00E10C2D /* DataResult.swift in Sources */,
+				7EEB4DC92B03634A004BD3C8 /* UIConstants.swift in Sources */,
 				7E70CDE02A9F51DD00E10C2D /* DataProvider.swift in Sources */,
 				7E39EB432AF4FA4600E59626 /* CurrencyFormatterService.swift in Sources */,
 				7E70CE022AA099E600E10C2D /* UIViewController + Extension.swift in Sources */,
@@ -429,6 +448,7 @@
 				7E70CDE92A9F69DA00E10C2D /* DataProviderProtocol.swift in Sources */,
 				7E70CE1C2AA0F59C00E10C2D /* AlertService.swift in Sources */,
 				7E70CDD02A9F43C900E10C2D /* NetworkClientService.swift in Sources */,
+				7EEB4DC62B0357AE004BD3C8 /* CustomCollectionViewCompositionalLayout.swift in Sources */,
 				7E70CDE42A9F672C00E10C2D /* CatalogViewModelProtocol.swift in Sources */,
 				7E70CDD82A9F454F00E10C2D /* Advertisement.swift in Sources */,
 				7E70CE172AA0F0D700E10C2D /* HandlingErrorService.swift in Sources */,

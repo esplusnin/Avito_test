@@ -12,25 +12,10 @@ final class CatalogViewController: UIViewController {
     // MARK: - Dependencies:
     private let viewModel: CatalogViewModelProtocol?
     
-    // MARK: - Constants and Variables:
-    enum UIConstants {
-        static let smallInset: CGFloat = 5
-        static let defaultInset: CGFloat = 10
-        
-        static let numberOfLineInsets: CGFloat = 3
-        static let numberOfCells: CGFloat = 2
-        
-        static let cellHeight: CGFloat = 300
-        static let searchTextFieldHeight: CGFloat = 30
-        static let buttonSide: CGFloat = 10
-        static let searchTextFieldInsideViewSide: CGFloat = 10
-        
-        static let searchTextFieldCornerRadius: CGFloat = 10
-    }
-    
     // MARK: - UI:
     private lazy var catalogCollectionView: UICollectionView = {
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: CustomCollectionViewCompositionalLayout())
+        collectionView.register(CatalogCollectionViewFilterCell.self, forCellWithReuseIdentifier: Resources.Identifiers.catalogFilterCell)
         collectionView.register(CatalogCollectionViewCell.self, forCellWithReuseIdentifier: Resources.Identifiers.catalogCell)
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -159,6 +144,10 @@ final class CatalogViewController: UIViewController {
 
 // MARK: - UICollectionViewDataSource:
 extension CatalogViewController: UICollectionViewDataSource {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        2
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if viewModel?.productsObservable.wrappedValue.count == 0 {
             setupStumbs()
@@ -166,45 +155,42 @@ extension CatalogViewController: UICollectionViewDataSource {
             stumbLabel.removeFromSuperview()
         }
         
-        return viewModel?.productsObservable.wrappedValue.count ?? 0
+        switch section {
+        case 0:
+            return viewModel?.filterTypes.count ?? 0
+        default:
+            return viewModel?.productsObservable.wrappedValue.count ?? 0
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: Resources.Identifiers.catalogCell,
-            for: indexPath) as? CatalogCollectionViewCell else { return UICollectionViewCell() }
-        
-        if let model = viewModel?.productsObservable.wrappedValue[indexPath.row] {
-            cell.setupProduct(model: model)
+        switch indexPath.section {
+        case 0:
+            guard let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: Resources.Identifiers.catalogFilterCell,
+                for: indexPath) as? CatalogCollectionViewFilterCell else { return UICollectionViewCell() }
+            
+            if let text = viewModel?.filterTypes[indexPath.row] {
+                cell.setupFilterLabel(with: text)
+            }
+            
+            return cell
+        default:
+            guard let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: Resources.Identifiers.catalogCell,
+                for: indexPath) as? CatalogCollectionViewCell else { return UICollectionViewCell() }
+            
+            if let model = viewModel?.productsObservable.wrappedValue[indexPath.row] {
+                cell.setupProduct(model: model)
+            }
+            
+            return cell
         }
-        
-        return cell
     }
 }
 
 // MARK: - UICollectionViewDelegateFlowLayout:
 extension CatalogViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let viewWidht = view.frame.width
-        let cellWidht = (viewWidht - (UIConstants.defaultInset * UIConstants.numberOfLineInsets)) / UIConstants.numberOfCells
-        
-        return CGSize(width:cellWidht , height: UIConstants.cellHeight)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        UIConstants.defaultInset
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        UIConstants.defaultInset
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        let inset = UIConstants.defaultInset
-        
-        return UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset)
-    }
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let advertisements = viewModel?.productsObservable.wrappedValue else { return }
         let productID = advertisements[indexPath.row].id

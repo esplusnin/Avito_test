@@ -21,6 +21,7 @@ final class CatalogViewModel: CatalogViewModelProtocol {
         dataProvider
     }
     
+    private(set) var filterTypes = ["Сначала дорогие", "Сначала дешевые", "По алфавиту А-Я", "По алфавиту Я-А"]
     private var unsortedProducts: Advertisements = []
     
     // MARK: - Observable Values:
