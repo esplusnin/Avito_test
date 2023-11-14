@@ -137,7 +137,6 @@ private extension ProductViewController {
             self.view.addSubview(view)
             view.translatesAutoresizingMaskIntoConstraints = false
             view.layer.masksToBounds = true
-            view.layer.cornerRadius = 10
             view.backgroundColor = .lightGray
         }
         

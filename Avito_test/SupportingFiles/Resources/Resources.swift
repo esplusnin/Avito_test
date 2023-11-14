@@ -10,6 +10,7 @@ import UIKit
 enum Resources {
     enum Identifiers {
         static let catalogCell = "CatalogCell"
+        static let catalogFilterCell = "CatalogFilterCell"
     }
     
     enum Network {

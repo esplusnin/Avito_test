@@ -12,17 +12,10 @@ final class CatalogViewController: UIViewController {
     // MARK: - Dependencies:
     private let viewModel: CatalogViewModelProtocol?
     
-    // MARK: - Constants and Variables:
-    enum UIConstants {
-        static let numberOfCells: CGFloat = 2
-        static let defaultInset: CGFloat = 10
-        static let cellHeight: CGFloat = 300
-        static let numberOfLineInsets: CGFloat = 3
-    }
-    
     // MARK: - UI:
     private lazy var catalogCollectionView: UICollectionView = {
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: CustomCollectionViewCompositionalLayout())
+        collectionView.register(CatalogCollectionViewFilterCell.self, forCellWithReuseIdentifier: Resources.Identifiers.catalogFilterCell)
         collectionView.register(CatalogCollectionViewCell.self, forCellWithReuseIdentifier: Resources.Identifiers.catalogCell)
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -34,7 +27,7 @@ final class CatalogViewController: UIViewController {
     
     private lazy var cancelButton: UIButton = {
         let button = UIButton(type: .system)
-        button.frame = CGRect(x: 0, y: 0, width: 10, height: 10)
+        button.frame = CGRect(x: 0, y: 0, width: UIConstants.buttonSide, height: UIConstants.buttonSide)
         button.setImage(Resources.Images.cancelButtonImage, for: .normal)
         
         return button
@@ -42,8 +35,8 @@ final class CatalogViewController: UIViewController {
     
     private lazy var searchTextField: UITextField = {
         let textField = UITextField()
-        textField.layer.cornerRadius = 10
-        textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textField.bounds.height))
+        textField.layer.cornerRadius = UIConstants.searchTextFieldCornerRadius
+        textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: UIConstants.searchTextFieldInsideViewSide, height: textField.bounds.height))
         textField.rightView = cancelButton
         textField.leftViewMode = .always
         textField.rightViewMode = .whileEditing
@@ -151,6 +144,10 @@ final class CatalogViewController: UIViewController {
 
 // MARK: - UICollectionViewDataSource:
 extension CatalogViewController: UICollectionViewDataSource {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        2
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if viewModel?.productsObservable.wrappedValue.count == 0 {
             setupStumbs()
@@ -158,45 +155,42 @@ extension CatalogViewController: UICollectionViewDataSource {
             stumbLabel.removeFromSuperview()
         }
         
-        return viewModel?.productsObservable.wrappedValue.count ?? 0
+        switch section {
+        case 0:
+            return viewModel?.filterTypes.count ?? 0
+        default:
+            return viewModel?.productsObservable.wrappedValue.count ?? 0
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: Resources.Identifiers.catalogCell,
-            for: indexPath) as? CatalogCollectionViewCell else { return UICollectionViewCell() }
-        
-        if let model = viewModel?.productsObservable.wrappedValue[indexPath.row] {
-            cell.setupProduct(model: model)
+        switch indexPath.section {
+        case 0:
+            guard let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: Resources.Identifiers.catalogFilterCell,
+                for: indexPath) as? CatalogCollectionViewFilterCell else { return UICollectionViewCell() }
+            
+            if let text = viewModel?.filterTypes[indexPath.row] {
+                cell.setupFilterLabel(with: text)
+            }
+            
+            return cell
+        default:
+            guard let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: Resources.Identifiers.catalogCell,
+                for: indexPath) as? CatalogCollectionViewCell else { return UICollectionViewCell() }
+            
+            if let model = viewModel?.productsObservable.wrappedValue[indexPath.row] {
+                cell.setupProduct(model: model)
+            }
+            
+            return cell
         }
-        
-        return cell
     }
 }
 
 // MARK: - UICollectionViewDelegateFlowLayout:
 extension CatalogViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let viewWidht = view.frame.width
-        let cellWidht = (viewWidht - (UIConstants.defaultInset * UIConstants.numberOfLineInsets)) / UIConstants.numberOfCells
-        
-        return CGSize(width:cellWidht , height: UIConstants.cellHeight)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        UIConstants.defaultInset
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        UIConstants.defaultInset
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        let inset = UIConstants.defaultInset
-        
-        return UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset)
-    }
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let advertisements = viewModel?.productsObservable.wrappedValue else { return }
         let productID = advertisements[indexPath.row].id
@@ -226,10 +220,10 @@ private extension CatalogViewController {
         searchTextField.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            searchTextField.topAnchor.constraint(equalTo: navigationBar.topAnchor, constant: 5),
-            searchTextField.leadingAnchor.constraint(equalTo: navigationBar.leadingAnchor, constant: 10),
-            searchTextField.trailingAnchor.constraint(equalTo: navigationBar.trailingAnchor, constant: -10),
-            searchTextField.heightAnchor.constraint(equalToConstant: 30)
+            searchTextField.topAnchor.constraint(equalTo: navigationBar.topAnchor, constant: UIConstants.smallInset),
+            searchTextField.leadingAnchor.constraint(equalTo: navigationBar.leadingAnchor, constant: UIConstants.defaultInset),
+            searchTextField.trailingAnchor.constraint(equalTo: navigationBar.trailingAnchor, constant: -UIConstants.defaultInset),
+            searchTextField.heightAnchor.constraint(equalToConstant: UIConstants.searchTextFieldHeight)
         ])
     }
 }
